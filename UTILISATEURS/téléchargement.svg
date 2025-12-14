@@ -1,0 +1,47 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rounded background -->
+  <rect x="36" y="56" width="440" height="360" rx="80" fill="url(#bg)"></rect>
+
+  <!-- Folded V / envelope-inspired chevron -->
+  <path d="M96 144
+           C96 120 116 104 140 104
+           H196
+           L256 180
+           L316 104
+           H372
+           C396 104 416 120 416 144
+           V296
+           C416 320 396 336 372 336
+           H140
+           C116 336 96 320 96 296
+           V144Z" fill="url(#fold)"></path>
+
+  <!-- Inner rising chart line -->
+  <path d="M150 270
+           L210 230
+           L250 255
+           L310 200
+           L362 220" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"></path>
+
+  <!-- Small chart nodes -->
+  <circle cx="150" cy="270" r="10" fill="white"></circle>
+  <circle cx="210" cy="230" r="10" fill="white"></circle>
+  <circle cx="250" cy="255" r="10" fill="white"></circle>
+  <circle cx="310" cy="200" r="10" fill="white"></circle>
+  <circle cx="362" cy="220" r="10" fill="white"></circle>
+
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="36" y1="56" x2="476" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"></stop>
+      <stop offset="1" stop-color="#0F2B3A"></stop>
+    </linearGradient>
+
+    <!-- Fold gradient -->
+    <linearGradient id="fold" x1="96" y1="104" x2="416" y2="336" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16C8A7"></stop>
+      <stop offset="0.52" stop-color="#1F8BFF"></stop>
+      <stop offset="1" stop-color="#1FE37B"></stop>
+    </linearGradient>
+  </defs>
+</svg>
