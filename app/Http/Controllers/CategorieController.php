@@ -19,12 +19,50 @@ class CategorieController extends Controller
     return view('admin.categorie.show', compact('categorie'));
 }
 
-    // Affiche la liste paginée des catégories
-    public function index()
-    {
-        $categories = Categorie::paginate(10);
-        return view('admin.categorie.index', compact('categories'));
+
+
+public function index(Request $request)
+{
+    $perPage = (int) $request->input('per_page', 10);
+    $perPage = in_array($perPage, [10, 25, 50, 100]) ? $perPage : 10;
+
+    $search = trim((string) $request->input('search', ''));
+    $sort   = (string) $request->input('sort', 'id_desc');
+
+    $query = Categorie::query();
+
+    // Search (designation)
+    if ($search !== '') {
+        $query->where('designation', 'like', "%{$search}%");
     }
+
+    // Sort options from the blade
+    switch ($sort) {
+        case 'id_asc':
+            $query->orderBy('id_categorie', 'asc');
+            break;
+
+        case 'designation_asc':
+            $query->orderBy('designation', 'asc');
+            break;
+
+        case 'designation_desc':
+            $query->orderBy('designation', 'desc');
+            break;
+
+        case 'id_desc':
+        default:
+            $query->orderBy('id_categorie', 'desc');
+            break;
+    }
+
+    $categories = $query
+        ->paginate($perPage)
+        ->appends($request->query()); // keep filters in pagination links
+
+    return view('admin.categorie.index', compact('categories'));
+}
+
 
     // Affiche le formulaire de création
     public function create()
