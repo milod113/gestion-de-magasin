@@ -121,6 +121,16 @@
                     <!-- Actions -->
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center justify-end space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                       
+                       <a href="{{ route('fournisseurs.show', $fournisseur->id_fournisseur) }}"
+   class="relative group/show p-2 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 hover:from-blue-100 hover:to-cyan-100 dark:hover:from-blue-800/30 dark:hover:to-cyan-800/30 transition-all duration-300 shadow-sm hover:shadow-md">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-lg blur opacity-0 group-hover/show:opacity-20 transition-opacity duration-300"></div>
+    <i class="fas fa-eye text-blue-600 dark:text-blue-400 relative z-10"></i>
+    <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 dark:bg-gray-900 text-white text-xs rounded opacity-0 group-hover/show:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+        Voir détails
+    </div>
+</a>
+
                             <!-- Edit Button -->
                             <a href="{{ route('fournisseurs.edit', $fournisseur) }}" 
                                class="relative group/edit p-2 rounded-lg bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 hover:from-amber-100 hover:to-yellow-100 dark:hover:from-amber-800/30 dark:hover:to-yellow-800/30 transition-all duration-300 shadow-sm hover:shadow-md">

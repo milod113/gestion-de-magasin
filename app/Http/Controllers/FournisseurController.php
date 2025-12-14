@@ -18,6 +18,13 @@ class FournisseurController extends Controller
         return view('admin.fournisseurs.create');
     }
 
+public function show($id)
+{
+    $fournisseur = Fournisseur::findOrFail($id);
+    return view('admin.fournisseurs.show', compact('fournisseur'));
+}
+
+
   public function store(Request $request)
 {
     $request->validate([
