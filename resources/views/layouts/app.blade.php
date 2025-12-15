@@ -45,23 +45,23 @@
             align-items: center;
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
-        
+
         .dark #loading-screen {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
-        
+
         #loading-screen.hidden {
             opacity: 0;
             visibility: hidden;
         }
-        
+
         .loader {
             width: 64px;
             height: 64px;
             position: relative;
             margin-bottom: 1.5rem;
         }
-        
+
         .loader::before,
         .loader::after {
             content: '';
@@ -75,12 +75,12 @@
             animation: loading-bounce 1s infinite ease-in-out;
             opacity: 0.6;
         }
-        
+
         .loader::after {
             background: linear-gradient(45deg, var(--brand-red), var(--brand-orange));
             animation-delay: -0.5s;
         }
-        
+
         @keyframes loading-bounce {
             0%, 100% {
                 transform: scale(0);
@@ -89,18 +89,18 @@
                 transform: scale(1);
             }
         }
-        
+
         .loading-text {
             font-size: 1.125rem;
             font-weight: 600;
             color: #1e293b;
             letter-spacing: 0.025em;
         }
-        
+
         .dark .loading-text {
             color: #f1f5f9;
         }
-        
+
         .loading-progress {
             width: 200px;
             height: 3px;
@@ -110,11 +110,11 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         .dark .loading-progress {
             background: rgba(255,255,255,0.1);
         }
-        
+
         .loading-progress::after {
             content: '';
             position: absolute;
@@ -125,7 +125,7 @@
             background: linear-gradient(90deg, var(--brand-red), var(--brand-orange), var(--brand-amber));
             animation: loading-progress 1.5s infinite ease-in-out;
         }
-        
+
         @keyframes loading-progress {
             0% {
                 left: -100%;
@@ -187,7 +187,7 @@
             border: 2px solid white;
         }
         .dark .status-indicator { border-color: #111827; }
-        
+
 
         .profile-name {
             font-weight: 800;
@@ -234,20 +234,20 @@
             border: 1px solid rgba(0,0,0,0.05);
             overflow: hidden;
         }
-        
+
         .dark .user-dropdown {
             background: #1f2937;
             border: 1px solid rgba(255,255,255,0.05);
             box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 4px 24px rgba(0,0,0,0.2);
         }
-        
+
         .user-dropdown-header {
             background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
             padding: 1.5rem;
             color: white;
             position: relative;
         }
-        
+
         .user-dropdown-header::before {
             content: '';
             position: absolute;
@@ -257,7 +257,7 @@
             height: 4px;
             background: linear-gradient(90deg, var(--brand-red), var(--brand-orange), var(--brand-amber));
         }
-        
+
         .user-dropdown-avatar {
             width: 64px;
             height: 64px;
@@ -272,7 +272,7 @@
             margin-bottom: 1rem;
             border: 3px solid rgba(255,255,255,0.3);
         }
-        
+
         .user-dropdown-item {
             padding: 0.75rem 1.25rem;
             display: flex;
@@ -282,37 +282,37 @@
             transition: all 0.2s ease;
             border-left: 3px solid transparent;
         }
-        
+
         .dark .user-dropdown-item {
             color: #d1d5db;
         }
-        
+
         .user-dropdown-item:hover {
             background: #f3f4f6;
             color: #111827;
             border-left: 3px solid var(--brand-orange);
         }
-        
+
         .dark .user-dropdown-item:hover {
             background: #374151;
             color: white;
         }
-        
+
         .user-dropdown-divider {
             height: 1px;
             background: #e5e7eb;
             margin: 0.5rem 0;
         }
-        
+
         .dark .user-dropdown-divider {
             background: #374151;
         }
-        
+
         .user-dropdown-footer {
             background: #f9fafb;
             padding: 1rem 1.25rem;
         }
-        
+
         .dark .user-dropdown-footer {
             background: #111827;
         }
@@ -364,11 +364,11 @@
         .sidebar-item {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         .sidebar-item:hover:not(.active) {
             background: rgba(249,115,22,0.05);
         }
-        
+
         .dark .sidebar-item:hover:not(.active) {
             background: rgba(255,255,255,0.03);
         }
@@ -377,35 +377,35 @@
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
-        
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f5f9;
             border-radius: 10px;
         }
-        
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 10px;
         }
-        
+
         .dark .custom-scrollbar::-webkit-scrollbar-track {
             background: #1f2937;
         }
-        
+
         .dark .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #4b5563;
         }
-        
+
         /* Card hover effect */
         .card-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .dark .card-hover:hover {
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
         }
@@ -414,31 +414,31 @@
         .stats-card-indigo {
             background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
         }
-        
+
         .dark .stats-card-indigo {
             background: linear-gradient(135deg, #312e81 0%, #3730a3 100%);
         }
-        
+
         .stats-card-red {
             background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
         }
-        
+
         .dark .stats-card-red {
             background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
         }
-        
+
         .stats-card-green {
             background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
         }
-        
+
         .dark .stats-card-green {
             background: linear-gradient(135deg, #065f46 0%, #047857 100%);
         }
-        
+
         .stats-card-purple {
             background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
         }
-        
+
         .dark .stats-card-purple {
             background: linear-gradient(135deg, #581c87 0%, #7c3aed 100%);
         }
@@ -596,7 +596,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="py-2">
                             <a href="#" class="user-dropdown-item">
                                 <i class="ti ti-user-circle text-lg"></i>
@@ -605,7 +605,7 @@
                                     <div class="text-xs text-gray-500 dark:text-gray-400">Gérer votre compte</div>
                                 </div>
                             </a>
-                            
+
                             <a href="#" class="user-dropdown-item">
                                 <i class="ti ti-settings text-lg"></i>
                                 <div>
@@ -613,7 +613,7 @@
                                     <div class="text-xs text-gray-500 dark:text-gray-400">Personnaliser l'interface</div>
                                 </div>
                             </a>
-                            
+
                             <a href="#" class="user-dropdown-item">
                                 <i class="ti ti-bell-ringing text-lg"></i>
                                 <div>
@@ -622,9 +622,9 @@
                                 </div>
                                 <span class="ml-auto bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-bold px-2 py-1 rounded-full">3</span>
                             </a>
-                            
+
                             <div class="user-dropdown-divider"></div>
-                            
+
                             <a href="#" class="user-dropdown-item">
                                 <i class="ti ti-help-circle text-lg"></i>
                                 <div>
@@ -632,7 +632,7 @@
                                     <div class="text-xs text-gray-500 dark:text-gray-400">Documentation et FAQ</div>
                                 </div>
                             </a>
-                            
+
                             <div class="user-dropdown-footer">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -912,6 +912,29 @@
                         <span class="flex-1">Statistiques Mensuelles</span>
                     </a>
                 </div>
+<div class="pt-4 mt-2 border-t border-gray-200 dark:border-gray-700/50">
+    <p class="px-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+        Communications
+    </p>
+
+    {{-- Inbox --}}
+    <a href="{{ route('messages.inbox') }}"
+       class="sidebar-item flex items-center px-4 py-3 font-medium rounded-xl hover:bg-gray-100/80 dark:hover:bg-gray-700/80 transition">
+        <span class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+            <i class="ti ti-inbox text-sm"></i>
+        </span>
+        <span class="flex-1">Inbox</span>
+    </a>
+
+    {{-- Sent --}}
+    <a href="{{ route('messages.sent') }}"
+       class="sidebar-item flex items-center px-4 py-3 font-medium rounded-xl hover:bg-gray-100/80 dark:hover:bg-gray-700/80 transition">
+        <span class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+            <i class="ti ti-send text-sm"></i>
+        </span>
+        <span class="flex-1">Sent items</span>
+    </a>
+</div>
 
                 <!-- Administration section -->
                 <div class="pt-4 mt-2 border-t border-gray-200 dark:border-gray-700/50">
@@ -985,7 +1008,7 @@
                     @yield('actions')
                 </div>
             </div>
-            
+
             <!-- Stats cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-5 card-hover border border-gray-100 dark:border-gray-700">
@@ -1004,7 +1027,7 @@
                         <span class="text-gray-500 dark:text-gray-400 ml-1">Depuis le mois dernier</span>
                     </div>
                 </div>
-                
+
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-5 card-hover border border-gray-100 dark:border-gray-700">
                     <div class="flex items-center justify-between">
                         <div>
@@ -1021,7 +1044,7 @@
                         <span class="text-gray-500 dark:text-gray-400 ml-1">Depuis le mois dernier</span>
                     </div>
                 </div>
-                
+
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-5 card-hover border border-gray-100 dark:border-gray-700">
                     <div class="flex items-center justify-between">
                         <div>
@@ -1038,7 +1061,7 @@
                         <span class="text-gray-500 dark:text-gray-400 ml-1">Depuis le mois dernier</span>
                     </div>
                 </div>
-                
+
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-5 card-hover border border-gray-100 dark:border-gray-700">
                     <div class="flex items-center justify-between">
                         <div>
@@ -1056,7 +1079,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Main content area -->
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden border border-gray-100 dark:border-gray-700">
                 @yield('content')
@@ -1092,7 +1115,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // ========== LOADING ANIMATION ==========
     const loadingScreen = document.getElementById('loading-screen');
-    
+
     // Hide loading screen after page is loaded
     window.addEventListener('load', function() {
         // Add a small delay for better UX
@@ -1100,7 +1123,7 @@ document.addEventListener('DOMContentLoaded', function () {
             loadingScreen.classList.add('hidden');
         }, 500);
     });
-    
+
     // Fallback in case load event doesn't fire
     setTimeout(() => {
         loadingScreen.classList.add('hidden');
@@ -1112,20 +1135,20 @@ document.addEventListener('DOMContentLoaded', function () {
             mobileSidebarOpen: false,
             userDropdownOpen: false,
             notificationsOpen: false,
-            
+
             init() {
                 // Initialize any Alpine-specific logic here
                 console.log('Alpine app initialized');
             },
-            
+
             toggleUserDropdown() {
                 this.userDropdownOpen = !this.userDropdownOpen;
             },
-            
+
             toggleNotifications() {
                 this.notificationsOpen = !this.notificationsOpen;
             },
-            
+
             closeAllDropdowns() {
                 this.userDropdownOpen = false;
                 this.notificationsOpen = false;
@@ -1146,7 +1169,7 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('theme',
             document.documentElement.classList.contains('dark') ? 'dark' : 'light'
         );
-        
+
         // Show loading effect for dark mode transition
         loadingScreen.classList.remove('hidden');
         setTimeout(() => {
@@ -1172,7 +1195,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[x-data]').forEach(el => {
         // This will be handled by Alpine
     });
-    
+
     // Close dropdowns when clicking outside
     document.addEventListener('click', (event) => {
         const userDropdowns = document.querySelectorAll('[x-data] [x-show]');
@@ -1183,28 +1206,28 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-    
+
     // ========== PAGE TRANSITION LOADING ==========
     // Show loading screen during page transitions
     const allLinks = document.querySelectorAll('a:not([target="_blank"])');
     allLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             // Don't intercept if it's a hash link or external
-            if (this.getAttribute('href').startsWith('#') || 
+            if (this.getAttribute('href').startsWith('#') ||
                 this.getAttribute('href').startsWith('http')) {
                 return;
             }
-            
+
             // Don't intercept if it has a data-no-loading attribute
             if (this.hasAttribute('data-no-loading')) {
                 return;
             }
-            
+
             // Show loading screen
             loadingScreen.classList.remove('hidden');
         });
     });
-    
+
     // Handle form submissions
     document.querySelectorAll('form').forEach(form => {
         form.addEventListener('submit', function() {
@@ -1216,7 +1239,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Legacy dropdown handling (for compatibility)
 function setupLegacyDropdowns() {
     const dropdowns = document.querySelectorAll('.dropdown-menu');
-    
+
     document.addEventListener('click', (e) => {
         dropdowns.forEach(dropdown => {
             if (!dropdown.contains(e.target)) {
@@ -1224,7 +1247,7 @@ function setupLegacyDropdowns() {
             }
         });
     });
-    
+
     // Toggle dropdowns
     document.querySelectorAll('[data-toggle="dropdown"]').forEach(button => {
         button.addEventListener('click', (e) => {
