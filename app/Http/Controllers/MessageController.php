@@ -147,14 +147,65 @@ return redirect()->route('messages.sent')
     /**
      * Afficher un message.
      */
-    public function show(Message $message)
-    {
-$messages = Message::with(['sender', 'recipient', 'attachments'])
-    ->latest()
-    ->paginate(15);
 
-        return view('messages.show', compact('message'));
+
+public function show(Message $message)
+{
+    $message->load([
+        'sender', 'recipient',
+        'attachments',              // if you have message attachments
+        'replies.user',
+        'replies.attachments',
+    ]);
+
+    if ($message->recipient_id === auth()->id() && !$message->is_read) {
+        $message->update(['is_read' => true, 'read_at' => now()]);
     }
+
+    return view('messages.show', compact('message'));
+}
+
+
+
+
+public function reply(Request $request, Message $message)
+{
+    // allow only sender or recipient to reply (optional but recommended)
+    abort_if(!in_array(auth()->id(), [$message->user_id, $message->recipient_id]), 403);
+
+    $validated = $request->validate([
+        'contenu' => ['required', 'string'],
+        'attachments' => ['nullable', 'array'],
+        'attachments.*' => ['file', 'max:10240'],
+    ]);
+
+    DB::transaction(function () use ($request, $message, $validated) {
+
+        $reply = $message->replies()->create([
+            'user_id' => auth()->id(),
+            'contenu' => $validated['contenu'],
+        ]);
+
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $path = $file->store('reply_attachments', 'public');
+
+                $reply->attachments()->create([
+                    'user_id' => auth()->id(),
+                    'disk' => 'public',
+                    'path' => $path,
+                    'original_name' => $file->getClientOriginalName(),
+                    'mime_type' => $file->getClientMimeType(),
+                    'size' => $file->getSize(),
+                ]);
+            }
+        }
+    });
+
+    return back()->with('success', 'Réponse envoyée.');
+}
+
+
 public function bulkMarkAsRead(Request $request)
 {
     $data = $request->validate([

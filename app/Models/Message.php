@@ -17,6 +17,10 @@ protected $casts = [
     {
         return $this->hasMany(Attachment::class);
     }
+public function replies()
+{
+    return $this->hasMany(\App\Models\Reply::class)->latest();
+}
 
  public function sender()
 {

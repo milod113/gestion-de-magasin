@@ -98,6 +98,8 @@ Route::delete('/messages/bulk-delete', [MessageController::class, 'bulkDelete'])
 Route::post('/messages/{message}/mark-as-read', [MessageController::class, 'markAsRead'])
     ->name('messages.markAsRead');
 
+Route::post('/messages/{message}/reply', [MessageController::class, 'reply'])
+    ->name('messages.reply');
 
     // Conventions
     Route::resource('conventions', ConventionController::class);
