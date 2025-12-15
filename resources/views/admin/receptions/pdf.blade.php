@@ -323,7 +323,7 @@
 
             <div class="logo-section">
                 <div class="logo">
-                 BL
+                fff BL
                 </div>
                 <div class="text-muted">Document officiel de réception</div>
             </div>
