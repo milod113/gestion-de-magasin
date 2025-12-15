@@ -13,8 +13,11 @@ class LigneReception extends Model
         'article_reference',
         'quantité',
         'reference_BL',
+        'n_serie',
         'prix_unitaire',
         'sous_total',
+        'item_type',
+        'item_id',
     ];
 
     public $timestamps = false;
@@ -29,5 +32,10 @@ class LigneReception extends Model
     public function article()
     {
         return $this->belongsTo(Article::class, 'article_reference', 'ref_article');
+    }
+        // ✅ Article ou Equipment
+    public function item()
+    {
+        return $this->morphTo();
     }
 }

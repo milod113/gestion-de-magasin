@@ -17,9 +17,42 @@ use App\Models\LigneReception;
 class ConventionController extends Controller
 {
 
+public function items(Convention $convention)
+{
+    $convention->load([
+        'lignes.article',
+        'lignes.equipment',
+    ]);
+
+    $items = $convention->lignes->map(function ($l) {
+
+        if ($l->item_type === 'equipment') {
+            return [
+                'type' => 'equipment',                 // ⚠️ IMPORTANT
+                'id' => $l->equipment_id,
+                'label' => $l->equipment?->label,
+                'qty_convenue' => $l->quantite_convenue,
+                'price' => $l->prix_convenu,           // ✅ renommé
+            ];
+        }
+
+        return [
+            'type' => 'article',
+            'id' => $l->article_id,
+            'label' => $l->article?->designation,
+            'qty_convenue' => $l->quantite_convenue,
+            'price' => $l->prix_convenu,               // ✅ renommé
+        ];
+    });
+
+    return response()->json([
+        'items' => $items
+    ]);
+}
 
 
-    
+
+
     public function index()
     {
         $conventions = Convention::with('fournisseur')
@@ -66,7 +99,7 @@ public function create()
 
 
 
- 
+
 
 public function store(Request $request)
 {

@@ -83,7 +83,8 @@ Route::resource('fournisseurs', FournisseurController::class);
 
 Route::resource('receptions', ReceptionController::class);
 Route::get('/history/chart', [App\Http\Controllers\HistoryChartController::class, 'index'])->name('history.chart');
-
+Route::get('/receptions/{id}/pdf', [ReceptionController::class, 'pdf'])
+    ->name('receptions.pdf');
 
 
 // routes/web.php
@@ -100,6 +101,8 @@ Route::resource('conventions', ConventionController::class);
 Route::get('conventions/{convention}/articles', [ConventionController::class, 'articles'])
     ->name('conventions.articles');
 
+Route::get('/conventions/{convention}/items', [ConventionController::class, 'items'])
+    ->name('conventions.items');
 
 
 Route::resource('users', UserController::class);

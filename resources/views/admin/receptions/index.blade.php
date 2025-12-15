@@ -74,11 +74,11 @@
                         <p class="text-sm text-gray-600 dark:text-gray-300">Gérez toutes les réceptions de marchandises</p>
                     </div>
                 </div>
-                
+
                 <!-- Quick Search + Create -->
                 <div class="flex items-center space-x-3 w-full md:w-auto">
                     <form method="GET" action="{{ route('receptions.index') }}" class="relative w-full md:w-64">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher..." 
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher..."
                                class="pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200">
                         <i class="ti ti-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300"></i>
 
@@ -88,8 +88,8 @@
                         <input type="hidden" name="date_from" value="{{ request('date_from') }}">
                         <input type="hidden" name="date_to" value="{{ request('date_to') }}">
                     </form>
-                    
-                    <a href="{{ route('receptions.create') }}" 
+
+                    <a href="{{ route('receptions.create') }}"
                        class="relative group overflow-hidden bg-gradient-to-r from-blue-600 via-cyan-500 to-emerald-400 hover:from-blue-700 hover:via-cyan-600 hover:to-emerald-500 text-white px-4 py-2.5 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-2 whitespace-nowrap">
                         <div class="absolute inset-0 bg-gradient-to-r from-blue-700 via-cyan-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <i class="ti ti-plus relative z-10"></i>
@@ -98,11 +98,11 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Filter Section -->
         <div class="px-6 py-4 bg-gradient-to-r from-blue-50/10 via-cyan-50/5 to-emerald-50/10 dark:from-blue-900/5 dark:via-cyan-900/5 dark:to-emerald-900/5 border-b border-gray-100 dark:border-gray-700">
             <form method="GET" action="{{ route('receptions.index') }}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                
+
                 {{-- Search --}}
                 <div>
                     <label for="search" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
@@ -174,17 +174,17 @@
                            value="{{ request('date_to') }}"
                            class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200">
                 </div>
-                
+
                 <!-- Filter Buttons -->
                 <div class="flex items-end space-x-2 md:col-span-2 lg:col-span-4">
-                    <button type="submit" 
+                    <button type="submit"
                             class="relative group overflow-hidden bg-gradient-to-r from-blue-600 via-cyan-500 to-emerald-400 hover:from-blue-700 hover:via-cyan-600 hover:to-emerald-500 text-white px-4 py-2.5 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-2">
                         <div class="absolute inset-0 bg-gradient-to-r from-blue-700 via-cyan-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <i class="ti ti-filter relative z-10"></i>
                         <span class="relative z-10 font-semibold">Appliquer les filtres</span>
                     </button>
-                    
-                    <a href="{{ route('receptions.index') }}" 
+
+                    <a href="{{ route('receptions.index') }}"
                        class="relative group overflow-hidden bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 hover:from-gray-700 hover:via-gray-600 hover:to-gray-500 text-white px-4 py-2.5 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-2">
                         <div class="absolute inset-0 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <i class="ti ti-refresh relative z-10"></i>
@@ -193,7 +193,7 @@
                 </div>
             </form>
         </div>
-        
+
         <!-- Table Section -->
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -223,12 +223,7 @@
                                 <span>Fournisseur</span>
                             </div>
                         </th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                            <div class="flex items-center space-x-1">
-                                <i class="ti ti-user text-emerald-400"></i>
-                                <span>Utilisateur</span>
-                            </div>
-                        </th>
+
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                             <div class="flex items-center space-x-1">
                                 <i class="ti ti-currency-dollar text-green-400"></i>
@@ -249,7 +244,7 @@
                         </th>
                     </tr>
                 </thead>
-                
+
                 <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     @foreach($receptions as $reception)
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-150 group">
@@ -294,16 +289,7 @@
                             </div>
                         </td>
 
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-8 w-8 rounded-md bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 flex items-center justify-center mr-2">
-                                    <i class="ti ti-user text-green-600 dark:text-green-300 text-xs"></i>
-                                </div>
-                                <div class="text-sm text-gray-900 dark:text-white">
-                                    {{ $reception->user->name ?? 'N/A' }}
-                                </div>
-                            </div>
-                        </td>
+
 
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center space-x-2">
@@ -336,14 +322,14 @@
 
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex items-center justify-end space-x-2">
-                                <a href="{{ route('receptions.show', $reception->id_reception) }}" 
+                                <a href="{{ route('receptions.show', $reception->id_reception) }}"
                                    class="relative group overflow-hidden w-8 h-8 flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 text-blue-600 dark:text-blue-200 hover:text-white hover:from-blue-600 hover:to-cyan-500 transition-all duration-300"
                                    title="Voir détails">
                                     <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     <i class="ti ti-eye relative z-10"></i>
                                 </a>
-                                
-                                <a href="{{ route('receptions.edit', $reception->id_reception) }}" 
+
+                                <a href="{{ route('receptions.edit', $reception->id_reception) }}"
                                    class="relative group overflow-hidden w-8 h-8 flex items-center justify-center rounded-lg bg-gradient-to-r from-yellow-100 to-amber-100 dark:from-yellow-900/30 dark:to-amber-900/30 text-yellow-600 dark:text-yellow-200 hover:text-white hover:from-yellow-600 hover:to-amber-500 transition-all duration-300"
                                    title="Modifier">
                                     <div class="absolute inset-0 bg-gradient-to-r from-yellow-600 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -351,11 +337,11 @@
                                 </a>
 
 
-                                
+
                                 <form action="{{ route('receptions.destroy', $reception->id_reception) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réception ?')" 
+                                    <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réception ?')"
                                             class="relative group overflow-hidden w-8 h-8 flex items-center justify-center rounded-lg bg-gradient-to-r from-red-100 to-orange-100 dark:from-red-900/30 dark:to-orange-900/30 text-red-600 dark:text-red-200 hover:text-white hover:from-red-600 hover:to-orange-500 transition-all duration-300"
                                             title="Supprimer">
                                         <div class="absolute inset-0 bg-gradient-to-r from-red-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -366,7 +352,7 @@
                         </td>
                     </tr>
                     @endforeach
-                    
+
                     @if($receptions->count() === 0)
                     <tr>
                         <td colspan="8" class="px-6 py-12 text-center">
@@ -389,7 +375,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <!-- Pagination -->
         @if($receptions->hasPages())
         <div class="px-6 py-4 border-t border-gray-100 dark:border-gray-700 bg-gradient-to-r from-blue-50/5 via-cyan-50/5 to-emerald-50/5 dark:from-blue-900/5 dark:via-cyan-900/5 dark:to-emerald-900/5">
@@ -398,7 +384,7 @@
                     <i class="ti ti-file-info mr-2 text-blue-400"></i>
                     Affichage de <span class="font-medium dark:text-white mx-1">{{ $receptions->firstItem() }}</span> à <span class="font-medium dark:text-white mx-1">{{ $receptions->lastItem() }}</span> sur <span class="font-medium dark:text-white mx-1">{{ $receptions->total() }}</span> réceptions
                 </div>
-                
+
                 {{-- keep query params in custom pagination --}}
                 @php
                     $queryParams = request()->query();
