@@ -4,7 +4,8 @@
 @section('subtitle', 'Détail du message')
 
 @section('content')
-<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+<div x-data="{ replyOpen: false }" x-cloak class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
     <!-- Breadcrumb -->
     <nav class="mb-6" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2 text-sm">
@@ -81,10 +82,12 @@
                         <i class="ti ti-mail text-white text-xl"></i>
                     </div>
                 </div>
+
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-bold text-gray-900 dark:text-white truncate">
                         {{ $message->sujet }}
                     </h1>
+
                     <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2">
                         <span class="inline-flex items-center gap-1 text-sm text-gray-600 dark:text-gray-300">
                             <i class="ti ti-clock text-sm"></i>
@@ -134,6 +137,14 @@
                     <i class="ti ti-arrow-left relative z-10"></i>
                     <span class="relative z-10">Retour</span>
                 </a>
+
+                <!-- Reply trigger -->
+                <button type="button"
+                        @click="replyOpen = true"
+                        class="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 text-white px-4 py-2.5 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
+                    <i class="ti ti-corner-up-left relative z-10"></i>
+                    <span class="relative z-10">Répondre</span>
+                </button>
             </div>
         </div>
     </div>
@@ -230,6 +241,14 @@
                         </span>
                     </h3>
                 </div>
+
+                <!-- Reply trigger (top right) -->
+                <button type="button"
+                        @click="replyOpen = true"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow text-sm font-medium text-gray-700 dark:text-gray-200">
+                    <i class="ti ti-plus"></i>
+                    Ajouter une réponse
+                </button>
             </div>
         </div>
 
@@ -244,6 +263,7 @@
                                     • {{ $reply->created_at?->format('d/m/Y H:i') }}
                                 </span>
                             </p>
+
                             <div class="mt-2 whitespace-pre-wrap text-gray-700 dark:text-gray-300">
                                 {!! nl2br(e($reply->contenu)) !!}
                             </div>
@@ -256,7 +276,6 @@
                                             <i class="ti ti-paperclip"></i>
                                             <span class="truncate max-w-xs">{{ $att->original_name ?? 'Fichier' }}</span>
                                             <span class="text-xs text-gray-500 dark:text-gray-400">
-                                                ({{ formatFileSize($att->size) }})
                                             </span>
                                         </a>
                                     @endforeach
@@ -276,37 +295,62 @@
         </div>
     </div>
 
-    <!-- Reply form -->
-    <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-400 flex items-center justify-center">
-                    <i class="ti ti-edit text-white text-sm"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Ajouter une réponse</h3>
-            </div>
-        </div>
+    <!-- ===========================
+         Reply Modal
+    ============================ -->
+    <div x-show="replyOpen" x-transition.opacity class="fixed inset-0 bg-black/50 z-40" @click="replyOpen=false"></div>
 
-        <div class="p-6">
-            <form method="POST" action="{{ route('messages.reply', $message) }}" enctype="multipart/form-data" class="space-y-4">
+    <div x-show="replyOpen" x-transition class="fixed inset-0 z-50 flex items-center justify-center px-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden" @click.stop>
+
+            <!-- Modal header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                    <i class="ti ti-corner-up-left"></i>
+                    Répondre
+                </h3>
+
+                <button type="button" @click="replyOpen=false"
+                        class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    <i class="ti ti-x text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal form -->
+            <form method="POST"
+                  action="{{ route('messages.reply', $message) }}"
+                  enctype="multipart/form-data"
+                  class="p-6 space-y-5">
                 @csrf
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Votre réponse</label>
                     <textarea name="contenu" rows="5" required
-                              class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-600 dark:focus:border-blue-600 transition">{{ old('contenu') }}</textarea>
+                              class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                              placeholder="Écrivez votre réponse ici...">{{ old('contenu') }}</textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pièces jointes (réponse)</label>
                     <input type="file" name="attachments[]" multiple
-                           class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2.5">
+                           class="block w-full text-sm text-gray-600 dark:text-gray-300
+                                  file:mr-4 file:py-2 file:px-4
+                                  file:rounded-lg file:border-0
+                                  file:text-sm file:font-semibold
+                                  file:bg-blue-50 file:text-blue-700
+                                  hover:file:bg-blue-100
+                                  dark:file:bg-blue-900/30 dark:file:text-blue-300">
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Max 10MB par fichier.</p>
                 </div>
 
-                <div class="flex items-center justify-end gap-2">
+                <div class="flex items-center justify-end gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <button type="button" @click="replyOpen=false"
+                            class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                        Annuler
+                    </button>
+
                     <button type="submit"
-                            class="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
+                            class="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg hover:shadow-xl transition flex items-center gap-2">
                         <i class="ti ti-send text-sm"></i>
                         Envoyer la réponse
                     </button>
@@ -314,11 +358,13 @@
             </form>
         </div>
     </div>
+
 </div>
 @endsection
 
 @push('styles')
 <style>
+    [x-cloak] { display: none !important; }
     .prose-dark { color: #d1d5db; }
 </style>
 @endpush

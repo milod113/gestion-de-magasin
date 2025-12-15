@@ -1,3 +1,14 @@
 git add .
 git commit -m "Add recipient to messages + inbox/sent views"
 git push origin main
+
+
+
+git checkout main
+git pull origin main
+
+
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
