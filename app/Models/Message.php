@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable = ['user_id','recipient_id', 'sujet', 'contenu'];
+    protected $fillable = [ 'is_read', 'read_at','user_id','recipient_id', 'sujet', 'contenu'];
+
+protected $casts = [
+    'is_read' => 'boolean',
+    'read_at' => 'datetime',
+];
 
     public function attachments()
     {

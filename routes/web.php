@@ -89,6 +89,16 @@ Route::get('/messages/sent', [MessageController::class, 'sent'])->name('messages
 
 Route::resource('messages', MessageController::class);
 
+Route::post('/messages/bulk-read', [MessageController::class, 'bulkMarkAsRead'])
+    ->name('messages.bulkMarkAsRead');
+
+Route::delete('/messages/bulk-delete', [MessageController::class, 'bulkDelete'])
+    ->name('messages.bulkDelete');
+
+Route::post('/messages/{message}/mark-as-read', [MessageController::class, 'markAsRead'])
+    ->name('messages.markAsRead');
+
+
     // Conventions
     Route::resource('conventions', ConventionController::class);
     Route::get('conventions/{convention}/articles', [ConventionController::class, 'articles'])->name('conventions.articles');

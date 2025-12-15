@@ -29,15 +29,57 @@ public function index()
 
     return view('messages.index', compact('sent', 'received'));
 }
-public function inbox()
+
+
+public function inbox(Request $request)
 {
-    $messages = Message::with(['sender','attachments'])
-        ->where('recipient_id', auth()->id())
+    $query = Message::with(['sender.roles','attachments'])
+        ->where('recipient_id', auth()->id());
+
+    // 🔎 Search (subject + content + sender name)
+    if ($request->filled('search')) {
+        $s = $request->input('search');
+
+        $query->where(function ($q) use ($s) {
+            $q->where('sujet', 'like', "%{$s}%")
+              ->orWhere('contenu', 'like', "%{$s}%")
+              ->orWhereHas('sender', function ($qq) use ($s) {
+                  $qq->where('name', 'like', "%{$s}%")
+                     ->orWhere('email', 'like', "%{$s}%");
+              });
+        });
+    }
+
+    // ✅ Status filter: unread / read
+    if ($request->filled('status')) {
+        if ($request->status === 'unread') {
+            $query->where('is_read', false);
+        } elseif ($request->status === 'read') {
+            $query->where('is_read', true);
+        }
+    }
+
+    // 📅 Date filter: today / week / month
+    if ($request->filled('date')) {
+        if ($request->date === 'today') {
+            $query->whereDate('created_at', now()->toDateString());
+        } elseif ($request->date === 'week') {
+            $query->where('created_at', '>=', now()->subDays(7));
+        } elseif ($request->date === 'month') {
+            $query->where('created_at', '>=', now()->subDays(30));
+        }
+    }
+
+    // Order: unread first, then newest
+    $messages = $query
+        ->orderBy('is_read')   // false (0) first
         ->latest()
-        ->paginate(15);
+        ->paginate(15)
+        ->withQueryString();   // keep filters on pagination links
 
     return view('messages.inbox', compact('messages'));
 }
+
 
 public function sent()
 {
@@ -99,18 +141,68 @@ $message = Message::create([
             }
         });
 
-        return redirect()->back()->with('success', 'Message envoyé.');
-    }
+return redirect()->route('messages.sent')
+    ->with('success', 'Message envoyé.');    }
 
     /**
      * Afficher un message.
      */
     public function show(Message $message)
     {
-        $message->load(['user', 'attachments']);
+$messages = Message::with(['sender', 'recipient', 'attachments'])
+    ->latest()
+    ->paginate(15);
 
         return view('messages.show', compact('message'));
     }
+public function bulkMarkAsRead(Request $request)
+{
+    $data = $request->validate([
+        'ids' => ['required', 'array'],
+        'ids.*' => ['integer', 'exists:messages,id'],
+    ]);
+
+    Message::whereIn('id', $data['ids'])
+        ->where('recipient_id', auth()->id()) // security: only your inbox
+        ->update([
+            'is_read' => true,
+            'read_at' => now(),
+        ]);
+
+    return response()->json(['success' => true]);
+}
+
+public function bulkDelete(Request $request)
+{
+    $data = $request->validate([
+        'ids' => ['required', 'array'],
+        'ids.*' => ['integer', 'exists:messages,id'],
+    ]);
+
+    // You can decide the rule: delete only if recipient OR sender.
+    Message::whereIn('id', $data['ids'])
+        ->where(function ($q) {
+            $q->where('recipient_id', auth()->id())
+              ->orWhere('user_id', auth()->id());
+        })
+        ->delete();
+
+    return response()->json(['success' => true]);
+}
+
+public function markAsRead(Message $message)
+{
+    abort_if($message->recipient_id !== auth()->id(), 403);
+
+    $message->update([
+        'is_read' => true,
+        'read_at' => now(),
+    ]);
+
+    // For your JS click handler you want JSON:
+    return response()->json(['success' => true]);
+}
+
 
     /**
      * (Optionnel) Formulaire d’édition.
